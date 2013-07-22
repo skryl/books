@@ -1,0 +1,53 @@
+000000001CB3BED0: i_func_info_IaaI 0 clock start 2 
+000000001CB3BEF8: allocate_tt 0 2 
+000000001CB3BF08: move_xx x(1) x(2) 
+000000001CB3BF18: move_rx x(0) x(1) 
+000000001CB3BF28: move_xr x(2) x(0) 
+000000001CB3BF38: i_make_fun_It 481541584 2 
+000000001CB3BF50: i_call_ext_e erlang:spawn/1 
+000000001CB3BF60: move_rx x(0) x(1) 
+000000001CB3BF70: move_cr clock x(0) 
+000000001CB3BF80: call_bif_e erlang:register/2 
+000000001CB3BF90: deallocate_return_Q 0 
+
+000000001CB3BFA0: i_func_info_IaaI 0 clock stop 0 
+000000001CB3BFC8: allocate_tt 0 0 
+000000001CB3BFD8: move_x1_c stop 
+000000001CB3BFE8: move_cr clock x(0) 
+000000001CB3BFF8: send 
+000000001CB3C000: deallocate_return_Q 0 
+
+000000001CB3C010: i_func_info_IaaI 0 clock tick 2 
+000000001CB3C038: allocate_tt 2 2 
+000000001CB3C048: move_xy x(1) y(0) 
+000000001CB3C058: move_ry x(0) y(1) 
+000000001CB3C068: i_loop_rec_fr f(000000001CB3C0C0) x(0) 
+000000001CB3C078: i_is_eq_exact_immed_frc f(000000001CB3C0B0) x(0) stop 
+000000001CB3C090: remove_message 
+000000001CB3C098: move_deallocate_return_crQ void x(0) 2 
+000000001CB3C0B0: loop_rec_end_f f(000000001CB3C068) 
+000000001CB3C0C0: i_wait_timeout_locked_fs f(000000001CB3C068) y(1) 
+000000001CB3C0D8: timeout 
+000000001CB3C0E0: move_yr y(0) x(0) 
+000000001CB3C0F0: i_call_fun_I 0 
+000000001CB3C100: move_yx y(0) x(1) 
+000000001CB3C110: move_call_last_yrfQ y(1) x(0) clock:tick/2 2 
+
+000000001CB3C128: i_func_info_IaaI 0 clock module_info 0 
+000000001CB3C150: move_cr clock x(0) 
+000000001CB3C160: allocate_tt 0 1 
+000000001CB3C170: call_bif_e erlang:get_module_info/1 
+000000001CB3C180: deallocate_return_Q 0 
+
+000000001CB3C190: i_func_info_IaaI 0 clock module_info 1 
+000000001CB3C1B8: move_rx x(0) x(1) 
+000000001CB3C1C8: move_cr clock x(0) 
+000000001CB3C1D8: allocate_tt 0 2 
+000000001CB3C1E8: call_bif_e erlang:get_module_info/2 
+000000001CB3C1F8: deallocate_return_Q 0 
+
+000000001CB3C208: i_func_info_IaaI 0 clock '-start/2-fun-0-' 2 
+000000001CB3C230: move_xx x(1) x(2) 
+000000001CB3C240: move_rx x(0) x(1) 
+000000001CB3C250: move_call_only_xrf x(2) x(0) clock:tick/2 
+

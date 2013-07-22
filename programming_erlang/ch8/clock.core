@@ -1,0 +1,50 @@
+module 'clock' ['module_info'/0,
+		'module_info'/1,
+		'start'/2,
+		'stop'/0]
+    attributes []
+'start'/2 =
+    %% Line 4
+    fun (_cor1,_cor0) ->
+	let <_cor2> =
+	    %% Line 5
+	    ( fun () ->
+		  apply 'tick'/2
+		      (_cor1, _cor0)
+	      -| [{'id',{0,0,'-start/2-fun-0-'}}] )
+	in  let <_cor3> =
+		%% Line 5
+		call 'erlang':'spawn'
+		    (_cor2)
+	    in  %% Line 5
+		call 'erlang':'register'
+		    ('clock', _cor3)
+'stop'/0 =
+    %% Line 7
+    fun () ->
+	call 'erlang':'!'
+	    ('clock', 'stop')
+'tick'/2 =
+    %% Line 9
+    fun (_cor1,_cor0) ->
+	%% Line 10
+	receive
+	  %% Line 11
+	  <'stop'> when 'true' ->
+	      'void'
+	after _cor1 ->
+	  do  %% Line 13
+	      apply _cor0
+		  ()
+	      %% Line 14
+	      apply 'tick'/2
+		  (_cor1, _cor0)
+'module_info'/0 =
+    fun () ->
+	call 'erlang':'get_module_info'
+	    ('clock')
+'module_info'/1 =
+    fun (_cor0) ->
+	call 'erlang':'get_module_info'
+	    ('clock', _cor0)
+end
