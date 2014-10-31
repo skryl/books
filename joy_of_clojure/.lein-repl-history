@@ -1,0 +1,225 @@
+quit
+(println (seq (.getURLs (java.lang.ClassLoader/getSystemClassLoader))))
+quit
+tmls
+(ancestors (class #()))
+(import '[java.util Collections])
+(defn gimme [] (ArrayList. [1 3 4 8 2]))
+(import '[java.util Collections ArrayList])
+(defn gimme [] (ArrayList. [1 3 4 8 2]))
+(doto (gimme)
+  (Collections/sort (Collections/reverseOrder)))
+(doto (gimme)
+  (Collections/sort #(compare %2 %1)))
+(doto (Thread. #(do (Thread/sleep 5000)
+                    (println "haikeeba!"))))
+(doto (Thread. #(do (Thread/sleep 5000)
+                    (println "haikeeba!")))
+  .start)
+(import '[java.util.concurrent FutureTask])
+(let [f (FutureTask. #(do (Thread/sleep 5000) 42))]
+  (.start (Thread. #(.run f)))
+  (.get f))
+exit
+(import '(java.util.concurrent Executors))
+(def *pool* (Executors/newFixedThreadPool
+              (+ 2 (.availableProcessors (Runtime/getRuntime)))))
+(dotimes 3 #(println "a"))
+(doc dotimes)
+(dotimes [n 5] println 5)
+(dotimes println 5)
+(dotimes [] println 5)
+(dotimes [n 5] println 5)
+(dotimes [n 5] println "5")
+(dotimes [n 5] (println "5"))
+(dotimes [t 5] (println "5"))
+(dotimes [t 5 n 6] (println "5"))
+(dotimes [t 5] (println "5"))
+(src dotimes)
+(source dotimes)
+(def *pool* (Executors/newFixedThreadPool
+              (+ 2 (.availableProcessors (Runtime/getRuntime)))))
+(defn dothreads! [f & {thread-count :threads
+                       exec-count :times
+                      :or {thread-count 1 exec-count 1}}]
+  (dotimes [t thread-count]
+    (.submit *pool* #(dotimes [_ exec-count] (f)))))
+(dothreads #(println 5))
+(dothreads! #(println 5))
+(dothreads! #(println 5) {:threads 5 :times 10)
+(dothreads! #(println 5) {:threads 5 :times 10})
+(dothreads! #(println 5) :threads 5 :times 10)
+(dothreads! #(println 5) :threads 5 :times 3)
+(dothreads! #(println 5) :threads 1 :times 3)
+(dothreads! #(println 5) :threads 1 :times 10)
+(dothreads! #(println 5) :threads 2 :times 10)
+(dothreads! #(println 5) :threads 3 :times 10)
+jjjjjjdef initial-board
+  [[:- :k :-]
+   [:- :- :-]
+   [:- :K :-]])
+(def initial-board
+  [[:- :k :-]
+   [:- :- :-]
+   [:- :K :-]])
+(defn board-map [f bd]
+  (vec (map #(vec (for [s %] (f s))) bd)))
+(doc for)
+(for [x [1 2 3] y [1 2 3]])
+(for [x [1 2 3] y [1 2 3]] [x y])
+(def initial-board
+  [[:- :k :-]
+   [:- :- :-]
+   [:- :K :-]])
+(defn board-map [f bd]
+  (vec (map #(vec (for [s %] (f s))) bd)))
+(defn reset!
+  []
+  (def board (board-map ref initial-board))
+  (def to-move (ref [[:K [2 1]] [: [0 1]]]))
+  (def num-moves (ref 0)))
+(defn reset!
+  []
+  (def board (board-map ref initial-board))
+  (def to-move (ref [[:K [2 1]] [: [0 1]]]))
+  (def num-moves (ref 0)))
+(defn reset!
+  []
+  (def board (board-map ref initial-board))
+  (def to-move (ref [[:K [2 1]] [: [0 1]]]))
+  (def num-moves (ref 0)))
+(defn reset!
+  []
+  (def board (board-map ref initial-board))
+  (def to-move (ref [[:K [2 1]] [:k [0 1]]]))
+  (def num-moves (ref 0)))
+(def king-moves (partial neighbors
+  [-1 -1 [-1 0] [-1 1] [0 -1] [0 1] [1 -1] [1 0] [1 1]] 3))
+(defn good-move? [to enemy-sq]
+  (when (not= to enemy-sq) to))
+(defn choose-move [[[mover mpos ] [_ enemy-pos]]]
+  [mover (some #(good-move? % enemy-pos)
+               (shuffle (king-moves mpos)))])
+(def king-moves (partial neighbors
+  [ [-1 -1] [-1 0] [-1 1] [0 -1] [0 1] [1 -1] [1 0] [1 1]] 3))
+neighbors
+set
+(set 1 2 3)
+(set [1 2 3])
+(set [[1 2 3] [3 2 1]])
+(set [#{1 2 3} #{3 2 1}])
+(sum [1 2 3])
+(apply + [1 2 3])
+1 :: ( 2 3 )
+(cons 1 (2 3))
+(conj 1 [2 3])
+(conj [2 3] 1)
+(conj (2 3) 1)
+(doc conj)
+(vec 1 [1 2 3])
+(vec 1 2)
+(conj (1 2) 3)
+(conj '(1 2) 3)
+(conj #{} 1)
+(defn coins [amount denoms]
+  (if zero? amount
+    #{#{}}
+    (for [x denoms 
+          y (coins (- amount x) (filter denoms #(% < amount))) 
+          :if (= (apply + (conj y x) amount))] (conj y x))))
+(defn coins [amount denoms]
+  (if (zero? amount)
+    #{#{}}
+    (for [x denoms 
+          y (coins (- amount x) (filter denoms #(% < amount))) 
+          :if (= (apply + (conj y x) amount))] (conj y x))))
+(doc for)
+(defn coins [amount denoms]
+  (if (zero? amount)
+    #{#{}}
+    (for [x denoms 
+          y (coins (- amount x) (filter denoms #(% < amount))) 
+          :while (= (apply + (conj y x) amount))] (conj y x))))
+(coins 1 [1])
+(doc filter)
+(defn coins [amount denoms]
+  (if (zero? amount)
+    #{#{}}
+    (for [x denoms 
+          y (coins (- amount x) (filter #(% < amount) denoms)) 
+          :while (= (apply + (conj y x) amount))] (conj y x))))
+(coins 1 [1])
+(defn coins [amount denoms]
+  (if (zero? amount)
+    #{#{}}
+    (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (= (apply + (conj y x) amount))] (conj y x))))
+(coins 1 [1])
+(defn coins [amount denoms]
+  (if (zero? amount)
+    #{#{}}
+    (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (= (apply + (conj y x)) amount)] (conj y x))))
+(coins 1 [1])
+(coins 1 [1 2 3])
+(coins 5 [1 2 3])
+(coins 15 [1 2 3])
+(coins 15 [1 2 3 4 5])
+(defn coins [amount denoms]
+  (if (zero? amount)
+    #{#{}}
+    (set (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (= (apply + (conj y x)) amount)] (conj y x)))))
+(coins 15 [1 2 3 4 5])
+(defn coins [amount denoms]
+  (if (zero? amount)
+    (set #{})
+    (set (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (= (apply + (conj y x)) amount)] (conj y x)))))
+(filter #(% < 3) [1 2 3 4 5])
+(filter #(< % 3) [1 2 3 4 5])
+jjjjdefn coins [amount denoms]
+  (if (zero? amount)
+    (set #{})
+    (set (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (< (apply + (conj y x)) amount)] (conj y x)))))
+(defn coins [amount denoms]
+  (if (zero? amount)
+    (set #{})
+    (set (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (= (apply + (conj y x)) amount)] (conj y x)))))
+(defn coins [amount denoms]
+  (if (zero? amount)
+    (set #{})
+    (set (for [x denoms 
+          y (coins (- amount x) (filter #(<= % amount) denoms)) 
+          :while (< (apply + (conj y x)) amount)] (conj y x)))))
+(coins 15 [1 2 3 4 5])
+(defn coins [amount denoms]
+  (if (<= amount 0)
+    (set #{})
+    (set (for [x denoms
+               y (coins (- amount x) (filter #(<= % amount) denoms))
+               :while (= (apply + (conj y x)) amount)] (conj y x)))))
+(coins 15 [1 2 3 4 5])
+(defn coins [amount denoms]
+  (if (zero? amount)
+    (set #{})
+    (set (for [x denoms
+               y (coins (- amount x) (filter #(<= % (- amount x)) denoms))
+               :while (= (apply + (conj y x)) amount)] (conj y x)))))
+(coins 15 [1 2 3 4 5])
+(defn coins [amount denoms]
+  (if (zero? amount)
+    (set #{})
+    (set (for [x denoms
+               y (coins (- amount x) (filter #(<= % amount) denoms))
+               :while (= (apply + (conj y x)) amount)] (conj y x)))))
+(coins 15 [1 2 3 4 5])
+quit

@@ -236,3 +236,14 @@ let whileloop =
     1 + 1
   done
 ;;
+
+type 'a list = Nil | List of 'a * 'a list;; 
+let head = function 
+  | Nil -> Nil
+  | List(h,_) -> h
+;;
+
+let tail = function
+  | Nil -> Nil
+  | List(_,t) -> t
+;;
