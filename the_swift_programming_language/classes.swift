@@ -310,7 +310,7 @@ struct Fahrenheit {
 struct Celsius {
   var temperatureInCelsius: Double = 0.0
     init(fromFahrenheit fahrenheit: Double) {
-      temperatureInCelsius = (fahrenheit - 32.0) / 1.8
+    )  temperatureInCelsius = (fahrenheit - 32.0) / 1.8
     }
 
     init(fromKelvin kelvin: Double) {
