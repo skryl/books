@@ -153,3 +153,55 @@ console.log(set.size);      // 0
 
 // Maps
 //
+
+let map = new Map()
+map.set("title", "Understanding ES6")
+map.get("title")
+
+
+// object keys
+let map1 = new Map(),
+    key1 = {},
+    key2 = {};
+
+map1.set(key1, 5);
+map1.set(key2, 42);
+
+console.log(map1.get(key1));         // 5
+console.log(map1.get(key2));         // 42
+
+// methods
+
+let map2 = new Map();
+map2.set("name", "Nicholas");
+map2.set("age", 25);
+
+console.log(map2.size);          // 2
+console.log(map2.has("name"));   // true
+console.log(map2.get("name"));   // Nicholas
+
+map2.delete("name")
+console.log(map2.size);          // 1
+console.log(map2.has("name"));   // false
+console.log(map2.get("name"));   // undefined
+
+map2.clear();
+console.log(map2.size);          // 0
+console.log(map2.has("name"));   // false
+console.log(map2.get("name"));   // undefined
+
+// array initialization
+//
+
+let map3 = new Map([["name", "Nicholas"], ["age", 25]])
+console.log(map3.size);          // 2
+console.log(map3.has("name"));   // true
+console.log(map3.get("name"));   // Nicholas
+
+// forEach
+//
+
+map3.forEach((val, key, map) => console.log(val + ' => ' + key))
+
+
+
